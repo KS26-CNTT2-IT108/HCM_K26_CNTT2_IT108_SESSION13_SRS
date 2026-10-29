@@ -1,0 +1,23 @@
+SESSION13
+[SRS] KIẾN TRÚC HẠ TẦNG VÀ QUY TRÌNH TỰ ĐỘNG HÓA XỬ LÝ NHẬT KÝ HỆ THỐNG
+
+Tên lớp: HCM K26 CNTT2
+Môn học: Nhập môn công nghệ thông tin
+Họ và tên: LƯƠNG THANH THƯ
+
+
+IPO: Em xem hệ thống như dây chuyền 3 bước.
+Input là file log-he-thong.log do máy chủ ghi ra.
+Process là script auto_report.bat lọc dòng lỗi bằng Pipe.
+Output là file bao-cao-su-co.txt trong backup/.
+DIKW: Em biến dữ liệu thô thành quyết định qua 4 mức.
+Data là hàng triệu dòng log thô.
+Information là các dòng đã lọc theo ERROR 404, TIMEOUT.
+Knowledge là nhận ra trạm nào hay lỗi.
+Wisdom là quyết định nâng cấp thiết bị hoặc chỉnh cấu hình mạng.
+Cây thư mục 4 trụ cột: docs/ (tài liệu), scripts/ (xử lý), data/ (dữ liệu), backup/ (lưu trữ). Tên đặt kebab-case, không dấu, không khoảng trắng.
+Excel: Bảng cha danh-muc-linh-kien có khóa chính ma_linh_kien. Bảng con trang-thai-tram có khóa ngoại ma_linh_kien. Vùng dữ liệu không có hàng trống hay Merge Cell.
+Module 1: Em tạo cả cây thư mục bằng một lệnh mkdir, kiểm tra bằng tree, rồi cd greentech-system và echo. > .env. Em dùng đường dẫn tương đối, không dùng C:\Users\.... Em chạy thêm attrib +h .env để ẩn file và ghi .env vào .gitignore.
+Module 2: File auto_report.bat dùng echo in tiêu đề kèm ngày giờ. Sau đó type data\log-he-thong.log | findstr /I "CRITICAL ERROR TIMEOUT" >> backup\bao-cao-su-co.txt. Lệnh đọc từng dòng nên file 500MB không tràn RAM, và >> nối thêm chứ không ghi đè.
+Module 3: README.md có H1, code block chạy script, task list - [ ] và bảng thông số. File SRS trên Word gán Heading 1-2-3, chèn mục lục tự động sau trang bìa và cập nhật TOC trước khi xuất.
+Module 4: Em dùng =TRIM(A2) để bỏ khoảng trắng thừa. Sau đó dùng =VLOOKUP(TRIM(B2), 'danh-muc-linh-kien'!$A$2:$D$100, 2, FALSE). Dấu $ cố định vùng tra, FALSE là khớp chính xác. Nếu còn #N/A thì em làm sạch dữ liệu lại, rồi bật AutoFilter.
